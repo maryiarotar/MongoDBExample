@@ -22,9 +22,16 @@ public class ExpenseServiceImpl implements ExpenseService {
     }
 
     @Override
-    public void add(Expense expense) {
+    public boolean add(Expense expense) throws ExpenseNotFoundException{
 
-        expenseRepository.insert(expense);
+        Optional<Expense> isPresentInDB = expenseRepository.findByName(expense.getExpenseName());
+        if (isPresentInDB.isPresent()){
+            throw new ExpenseNotFoundException("Expense with name {" +
+                    isPresentInDB.get().getExpenseName() + "} exists!");
+        }
+
+        Expense ex = expenseRepository.insert(expense);
+        return true;
     }
 
     @Override

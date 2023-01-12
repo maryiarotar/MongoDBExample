@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface ExpenseService {
 
-    void add(Expense expense);
+    boolean add(Expense expense);
 
     Expense update(Expense expense);
 
