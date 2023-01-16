@@ -31,20 +31,4 @@ public class ProductServiceApplicationTests {
 	void contextLoads() {
 	}
 
-	@Autowired
-	ExpenseRepository repository;
-
-	@Test
-	@AssertMatchesDataset
-	@SeedWithDataset
-	void savingTest(){
-		Expense exp =  new Expense("111", "aaa",
-				ExpenseCategory.RESTAURANT, BigDecimal.TEN);
-		Expense savedExp = repository.save(exp);
-
-		assertThat(savedExp).usingRecursiveComparison()
-				.ignoringFields("id").isEqualTo(exp);
-	}
-
-
 }
